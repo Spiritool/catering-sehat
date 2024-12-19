@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RSI GARAM KALIANGET</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="../../stylesheets/keranjang.css" />
+
+
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg  border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../images/logo-rsi.png" alt="Logo" class="d-inline-block align-text-top"
+                    style="height: 50px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSu  pportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                    <path fill="#ffff"
+                                        d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14" />
+                                </svg></button>
+                        </form>
+                    </li>
+
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a class="link-offset-2 link-underline link-underline-opacity-0 me-3" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                            <path fill="#4E88AC"
+                                d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+                        </svg>
+                    </a>
+                    <div class="garis-vertical"></div>
+                    <a class="btn btn-outline-secondary me-2" href="#" role="button">Daftar</a>
+                    <a class="btn btn-success" href="#" role="button">Masuk</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- end navbar -->
+
+    <div class="container-fluid-latar p-3">
+
+        <div class="container-keranjang px-5">
+
+            <div class="container bg-white rounded p-2 px-3 mb-3 ">
+                <div class="form-check d-flex justify-content-between align-items-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Pilih Semua
+                        </label>
+                    </div>
+                    <a href="#"
+                        class="text-primary px-3 link-offset-2 link-underline link-underline-opacity-0"><small>Hapus</small></a>
+                </div>
+            </div>
+
+
+
+            <div class="container bg-white rounded px-3 table-responsive-container">
+                <table class="table text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Produk</th>
+                            <th scope="col">Jumlah</th>
+                            <th scope="col">Total Harga</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <% for(var i=0; i < data.length; i++){ %>
+                            <th scope="row" class="align-middle">
+                                <div class="form-check">
+                                    <input type="checkbox" class="item-checkbox" value="<%= JSON.stringify(data[i]) %>"
+                                        id="flexCheckDefault-<%= i %>">
+                                    <label class="form-check-label" for="flexCheckDefault-<%= i %>"></label>
+                                    <small hidden class="id text-danger"><%= data[i].id_pembayaran %></small>
+                                    <!-- Menyembunyikan ID -->
+                                </div>
+                            </th>
+
+                            <td class="align-middle">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="../images/menu/<%= data[i].gambar_menu %>" class="img-cart rounded"
+                                        alt="Healthy Fried Rice" style="width: 5rem; height: 5rem;">
+                                    <div class="d-flex flex-column ms-3">
+                                        <small class="nama text-primary"><%= data[i].nama_menu %></small>
+                                        <small class="opsi text-success"><%= data[i].kategori_pesanan %></small>
+                                        <small class="harga text-danger"><%= data[i].harga_menu %></small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="input-group input-group-sm d-flex justify-content-center"
+                                        style="width: 130px;">
+                                        <h1 id="id" name="id" class="id text-danger" hidden><%= data[i].id_pembayaran %>
+                                        </h1>
+                                        <button class="btn btn-outline-secondary btn-sm btn-minus" type="button"
+                                            style="width: 30px;">-</button>
+                                        <input type="number" class="form-control text-center quantity-input"
+                                            name="jumlah" data-id="<%= data[i].id %>" value="<%= data[i].jumlah %>"
+                                            style="width: 50px;" min="1">
+                                        <button class="btn btn-outline-secondary btn-sm btn-plus" type="button"
+                                            style="width: 30px;">+</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle text-danger total-harga">Rp. </td>
+                            <td class="align-middle">
+                                <a href="/pembayaran/delete/<%= data[i].id_pembayaran %>"
+                                    class="text-primary px-3 link-offset-2 link-underline link-underline-opacity-0"><small>Hapus</small></a>
+                            </td>
+
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container promo-section bg-white p-4">
+                <div class="row">
+                    <!-- Left column -->
+                    <div class="col-md-6 p-4 py-5">
+                        <div class="promo-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+                                <path fill="#025589"
+                                    d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83z" />
+                                <path fill="#025589"
+                                    d="M11.38 17.41c.39.39.9.59 1.41.59s1.02-.2 1.41-.59l6.21-6.21c.78-.78.78-2.05 0-2.83L12.62.58C12.25.21 11.74 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41zM5 2h6.21L19 9.79L12.79 16L5 8.21z" />
+                                <circle cx="7.25" cy="4.25" r="1.25" fill="#025589" />
+                            </svg>
+                            <h5><b>KODE PROMO/DISKON</b></h5>
+                        </div>
+                        <div class="mt-3">
+                            <div class="input-group " style="width: 18rem;">
+                                <input type="text" class="form-control" placeholder="Masukkan kode">
+                                <button class="btn btn-primary" type="button">Tukar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column -->
+                    <div class="col-md-6 text-end">
+                        <p>Subtotal <span id="subtotal" class="float-end">Rp. 0</span></p>
+                        <p class="promo-discount">Promo Jum'at Berkah <span class="float-end">-0%</span></p>
+                        <hr>
+                        <p class="promo-total">Total <span id="total" class="float-end">Rp. 0</span></p>
+                        <a class="btn btn-custom mt-3 checkout-button" href="#">Checkout</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            // Menangani perubahan nilai input jumlah secara langsung
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function () {
+                    const id = this.closest('.input-group').querySelector('.id').textContent.trim();
+                    const jumlah = parseInt(this.value, 10) || 0; // Mengambil nilai terbaru
+
+                    // Kirim data ke server
+                    fetch('/catering/update-quantity', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id,
+                                jumlah
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('Quantity updated successfully');
+                            } else {
+                                console.error('Failed to update quantity');
+                            }
+                        })
+                        .catch(err => console.error('Error:', err));
+                });
+            });
+        </script>
+
+
+        <script>
+            document.querySelector('.checkout-button').addEventListener('click', async function (e) {
+                e.preventDefault();
+
+                const checkedItems = Array.from(document.querySelectorAll('.item-checkbox:checked')).map(
+                    checkbox => {
+                        let itemData = JSON.parse(checkbox.value);
+                        const itemElement = checkbox.closest('.item');
+                        if (itemElement) {
+                            const idElement = itemElement.querySelector('.id');
+                            if (idElement) {
+                                itemData.id_pembayaran = idElement.textContent;
+                            }
+                        }
+                        return itemData.id_pembayaran;
+                    });
+
+                if (checkedItems.length === 0) {
+                    alert('Pilih setidaknya satu item untuk melanjutkan checkout.');
+                    return;
+                }
+
+                const response = await fetch('/catering/checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        itemIds: checkedItems
+                    }),
+                });
+
+                if (response.ok) {
+                    const newPage = await response.text();
+                    document.open(); // Bersihkan dokumen
+                    document.write(newPage); // Tulis ulang dengan respons baru
+                    document.close(); // Selesaikan
+                } else {
+                    const errorText = await response.text();
+                    alert(`Terjadi kesalahan: ${errorText}`);
+                }
+            });
+        </script>
+
+        <script>
+            document.querySelectorAll('.item-quantity').forEach(input => {
+                input.addEventListener('change', function () {
+                    const itemId = this.dataset.itemId; // Ambil ID item dari atribut data
+                    const checkbox = document.querySelector(`.item-checkbox[data-item-id="${itemId}"]`);
+
+                    if (checkbox) {
+                        // Ambil data lama dari checkbox
+                        let itemData = JSON.parse(checkbox.value);
+
+                        // Perbarui jumlah dalam data
+                        itemData.quantity = parseInt(this.value, 10) || 0;
+
+                        // Simpan kembali data yang diperbarui ke checkbox
+                        checkbox.value = JSON.stringify(itemData);
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            const checkboxes = document.querySelectorAll('.item-checkbox');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            const discountRate = 0;
+
+            function updateTotal() {
+                let subtotal = 0;
+
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const priceElement = checkbox.closest('tr').querySelector('.total-harga');
+                        const price = parseFloat(priceElement.textContent.replace('Rp.', '').replace(/\./g, '')
+                            .trim());
+                        subtotal += price;
+                    }
+                });
+
+                const discount = subtotal * discountRate;
+                const total = subtotal - discount;
+
+                subtotalElement.textContent = `Rp. ${subtotal.toLocaleString('id-ID')}`;
+                totalElement.textContent = `Rp. ${total.toLocaleString('id-ID')}`;
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateTotal);
+            });
+        </script>
+
+        <script>
+            // Fungsi untuk memperbarui total harga per item
+            function updateTotalPrice() {
+                const cartItems = document.querySelectorAll('.total-harga');
+
+                cartItems.forEach((item, index) => {
+                    const priceElement = document.querySelectorAll('.harga')[index];
+                    const quantityElement = document.querySelectorAll('.quantity-input')[index];
+
+                    const price = parseInt(priceElement.textContent.replace('Rp.', '').replace(/\./g, '')
+                        .trim());
+                    const quantity = parseInt(quantityElement.value);
+
+                    if (!isNaN(price) && !isNaN(quantity)) {
+                        const totalPrice = price * quantity;
+                        item.textContent = `Rp. ${totalPrice.toLocaleString('id-ID')}`;
+                    }
+                });
+
+                updateTotal(); // Memperbarui subtotal atau total keseluruhan jika diperlukan
+            }
+
+            // Menambah event listener ke tombol plus dan minus
+            document.querySelectorAll('.btn-plus, .btn-minus').forEach(button => {
+                button.addEventListener('click', function () {
+                    const input = this.parentElement.querySelector('.quantity-input');
+                    const isPlus = this.classList.contains('btn-plus');
+                    let currentQuantity = parseInt(input.value);
+
+                    if (isPlus) {
+                        input.value = currentQuantity + 1;
+                    } else if (currentQuantity > 1) {
+                        input.value = currentQuantity - 1;
+                    }
+
+                    input.dispatchEvent(new Event(
+                        'change')); // Memicu event 'change' agar updateTotalPrice terpanggil
+                });
+            });
+
+            // Menambah event listener untuk input jumlah secara manual
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('input', updateTotalPrice);
+                input.addEventListener('change',
+                    updateTotalPrice); // Untuk memastikan harga diperbarui saat tombol +/- ditekan
+            });
+
+            // Memperbarui total harga saat halaman dimuat
+            window.onload = function () {
+                updateTotalPrice();
+            };
+        </script>
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+        </script>
+
+        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <!-- Custom scripts -->
+        <script type="text/javascript" src="js/script.js"></script>
+    </div>
+</body>
+
+</html>

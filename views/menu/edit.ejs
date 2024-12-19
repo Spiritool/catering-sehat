@@ -1,0 +1,58 @@
+<%- include('../partials/__head.ejs') %>
+<body>
+    <div class="container-scroller d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <!-- partial:partials/_navbar.html -->
+        <!-- partial -->
+        <div class="main-panel w-100">
+            <div class="content-wrapper d-flex align-items-center justify-content-center">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Edit Data Menu</h4>
+                        <p class="card-description">
+                            Basic form layout
+                        </p>
+                        <form action="/menu/update/<%= id %>" method="POST" enctype="multipart/form-data" class="forms-sample">
+                            <div class="form-group">
+                                <label for="gambar_menu">Foto Menu</label>
+                                <input type="file" class="form-control" id="gambar_menu" name="gambar_menu">
+                            </div>
+                            <div class="form-group">
+                                <label for="nama_dokter">Nama</label>
+                                <input type="text" class="form-control" id="nama_menu" name="nama_menu" value="<%= data.nama_menu %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat_dokter">Harga</label>
+                                <input type="text" class="form-control" id="harga_menu" name="harga_menu" value="<%= data.harga_menu %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat_dokter">Deskripsi</label>
+                                <textarea type="text" class="form-control" id="harga_menu" name="deskripsi_menu" value="<%= data.deskripsi_menu %>" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="no_hp">Stock</label>
+                                <input type="text" class="form-control" id="stock" name="stock" value="<%= data.stock %>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Kategori</label>
+                                <select class="form-control" id="exampleFormControlSelect2" name="id_kategori" required>
+                                    <option value="<%= data.id_kategori %>"><%= data.nama_kategori %></option>
+                                    <% for(var i=0; i < data_kategori.length; i++){ %>
+                                        <option value="<%= data_kategori[i].id_kategori %>"><%= data_kategori[i].nama_kategori %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                            <button type="button" class="btn btn-light" onclick="history.back()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+</div>
+<!-- container-scroller ends -->
+<%- include('../partials/__foot.ejs') %>
+</body>
+</html>

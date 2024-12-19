@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RSI GARAM KALIANGET</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="../../stylesheets/riwayat.css" />
+
+
+</head>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg  border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../images/logo-rsi.png" alt="Logo" class="d-inline-block align-text-top"
+                style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                <path fill="#ffff"
+                                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14" />
+                            </svg></button>
+                    </form>
+                </li>
+
+            </ul>
+            <div class="d-flex align-items-center" style="margin-left: -10px;">
+                <!-- Keranjang Belanja -->
+                <a class="link-offset-2 link-underline link-underline-opacity-0 me-2" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                        <path fill="#4E88AC"
+                            d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+                    </svg>
+                </a>
+            
+                <div class="garis-vertical"></div>
+            
+                <!-- Dropdown setelah login -->
+                <div class="dropdown ms-2">
+                    <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button"
+                        id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/images/users/<%= data2[0].gambar_users %>" alt="User Profile"
+                            class="rounded-circle me-2" width="40" height="40">
+                        <%= data2[0].nama_panggilan_users %>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="profil">Profil Saya</a></li>
+                        <li><a class="dropdown-item" href="pesanan">Pesanan Saya</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="logout">Keluar</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</nav>
+<!-- end navbar -->
+
+<div class="container-fluid-latar px-5 py-4">
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="user-info text-center d-flex justify-content-center align-items-center">
+                    <!-- User Image -->
+                    <img src="/images/users/<%= data2[0].gambar_users %>" class="rounded-circle" alt="User Image">
+                    <!-- User Name -->
+                    <b class="ms-3">
+                        <%= data2[0].nama_panggilan_users %>
+                    </b>
+                </div>
+                <!-- Sidebar Menu -->
+                <ul class="nav flex-column text-center mt-3">
+                    <li class="nav-item">
+                        <a class="nav-link " href="profil">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="#025589" d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20zm2-2h12v-.8q0-.275-.137-.5t-.363-.35q-1.35-.675-2.725-1.012T12 15t-2.775.338T6.5 16.35q-.225.125-.363.35T6 17.2zm6-8q.825 0 1.413-.587T14 8t-.587-1.412T12 6t-1.412.588T10 8t.588 1.413T12 10m0 8"/></svg>
+                            Akun saya
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="pesanan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><g fill="none" stroke="#025589" stroke-width="2"><rect width="14" height="17" x="5" y="4" rx="2"/><path stroke-linecap="round" d="M9 9h6m-6 4h6m-6 4h4"/></g></svg>
+                            Pesanan
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="riwayat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="#025589" d="M12 21q-3.45 0-6.012-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m2.8-4.8L11 12.4V7h2v4.6l3.2 3.2z"/></svg>
+                            Riwayat
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="main-content">
+                    <!-- Profile Title and Description -->
+                    <div class="header">
+                        <h3>Riwayat saya</h3>
+                        <p>Kelola pesanan Anda untuk mengontrol, dan melihat daftar pesanan yang anda buat</p>
+                    </div>
+                    <div class="row w-100 mt-5 mb-3" style="color: var(--primary-color);">
+                        <div class="col-md-3">
+                            <b>Nama Pesanan</b>
+                        </div>
+                        <div class="col-md-3">
+                           <b>Tanggal Pesanan</b>
+                        </div>
+                        <div class="col-md-2">
+                            <b>Kuantitas</b>
+                        </div>
+                        <div class="col-md-2">
+                            <b>Total</b>
+                        </div>
+                        <div class="col-md-2">
+                            <b>Status</b>
+                        </div>
+                    </div>
+
+                    <!-- Accordion untuk daftar pesanan -->
+                    <div class="accordion accordion-flush mt-2" id="pesananAccordion">
+                        <!-- Pesanan 1 -->
+                        <div class="accordion-item border mb-3"> <!-- Tambahkan margin-bottom -->
+                            <h2 class="accordion-header d-flex align-items-center" id="pesanan1Header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#pesanan1" aria-expanded="false" aria-controls="pesanan1">
+                                    <div class="row w-100">
+                                        <div class="col-md-3">
+                                            <b><small>Pesanan 1</small></b>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b><small>12 Oktober 2024</small></b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><small>30 Pcs</small></b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><small>Rp. 235.000</small></b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><small>Dibatalkan</small></b>
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="pesanan1" class="accordion-collapse collapse" aria-labelledby="pesanan1Header"
+                                data-bs-parent="#pesananAccordion">
+                                <div class="accordion-body">
+                                    <!-- Tabel pesanan dalam accordion -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://via.placeholder.com/60" alt="Makanan"
+                                                        class="rounded-circle me-3">
+                                                    Healty Nasi Goreng
+                                                </td>
+                                                
+                                                <td>15</td>
+                                                <td>Rp. 240.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://via.placeholder.com/60" alt="Makanan"
+                                                        class="rounded-circle me-3">
+                                                    Healty Nasi Goreng
+                                                </td>
+                                                
+                                                <td>15</td>
+                                                <td>Rp. 240.000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-danger">Batalkan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pesanan 2 -->
+                        <div class="accordion-item border mb-3"> <!-- Tambahkan margin-bottom -->
+                            <h2 class="accordion-header d-flex align-items-center" id="pesanan2Header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#pesanan2" aria-expanded="false" aria-controls="pesanan2">
+                                    <div class="row w-100">
+                                        <div class="col-md-3">
+                                            <b><small>Pesanan 2</small></b>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b><small>12 Oktober 2024</small></b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><small>30 Pcs</small></b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><small>Rp. 235.000</small></b>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <b><small>Selesai</small></b>
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="pesanan2" class="accordion-collapse collapse" aria-labelledby="pesanan2Header"
+                                data-bs-parent="#pesananAccordion">
+                                <div class="accordion-body">
+                                    <!-- Tabel pesanan dalam accordion -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://via.placeholder.com/60" alt="Makanan"
+                                                        class="rounded-circle me-3">
+                                                    Healty Nasi Goreng
+                                                </td>
+                                                
+                                                <td>15</td>
+                                                <td>Rp. 240.000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://via.placeholder.com/60" alt="Makanan"
+                                                        class="rounded-circle me-3">
+                                                    Healty Nasi Goreng
+                                                </td>
+                                                
+                                                <td>15</td>
+                                                <td>Rp. 240.000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-end">
+                                        <button class="btn btn-primary">Pesanan Selesai</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript" src="js/script.js"></script>
+</div>
+</body>
+
+</html>

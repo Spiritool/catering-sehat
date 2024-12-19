@@ -1,0 +1,62 @@
+<%- include('../partials/__head.ejs') %>
+<body>
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <%- include('../partials/__nav.ejs') %>
+    <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Data Menu</h4>
+                                <a href="/menu/create" class="btn btn-sm btn-success mb-3">Tambah</a>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Gambar</th>
+                                                <th>Nama Menu</th>
+                                                <th>Harga</th>
+                                                <th>Deskripsi</th>
+                                                <th>Kategori</th>
+                                                <th>Stock</th>
+                                                <th colspan="2">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i < data.length; i++){ %>
+                                            <tr>
+                                                <th scope="row"><%= (i+1) %></th>
+                                                <td class="py-1">
+                                                    <img src="/images/menu/<%= data[i].gambar_menu %>" height="100" width="150" alt="Gambar Dokter"/>
+                                                </td>
+                                                <td><%= data[i].nama_menu %></td>
+                                                <td><%= data[i].harga_menu %></td>
+                                                <td><%= data[i].deskripsi_menu %></td>
+                                                <td><%= data[i].nama_kategori %></td>
+                                                <td><%= data[i].stock %></td>
+                                                <td>
+                                                    <a href="/menu/edit/<%= data[i].id_menu %>" class="btn btn-sm btn-warning">Edit</a>
+                                                    <a href="/menu/delete/<%= data[i].id_menu %>" class="btn btn-sm btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+</div>
+<!-- container-scroller ends -->
+<%- include('../partials/__foot.ejs') %>
+</body>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RSI GARAM KALIANGET</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <!-- MDB -->
+    <link rel="stylesheet" href="css/mdb.min.css" />
+    <link rel="stylesheet" href="../../stylesheets/profil.css" />
+
+
+</head>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg  border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="../images/logo-rsi.png" alt="Logo" class="d-inline-block align-text-top" style="height: 50px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                <path fill="#ffff"
+                                    d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14" />
+                            </svg></button>
+                    </form>
+                </li>
+
+            </ul>
+            <div class="d-flex align-items-center" style="margin-left: -10px;">
+                <!-- Keranjang Belanja -->
+                <a class="link-offset-2 link-underline link-underline-opacity-0 me-2" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                        <path fill="#4E88AC"
+                            d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+                    </svg>
+                </a>
+
+                <div class="garis-vertical"></div>
+
+                <!-- Dropdown setelah login -->
+                <div class="dropdown ms-2">
+                    <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" type="button"
+                        id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/images/users/<%= data2[0].gambar_users %>" alt="User Profile"
+                            class="rounded-circle me-2" width="40" height="40">
+                        <%= data2[0].nama_panggilan_users %>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="profil">Profil Saya</a></li>
+                        <li><a class="dropdown-item" href="pesanan">Pesanan Saya</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="logout">Keluar</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</nav>
+<!-- end navbar -->
+
+<div class="container-fluid-latar px-5 py-4">
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <div class="user-info text-center d-flex justify-content-center align-items-center">
+                    <!-- User Image -->
+                    <img src="/images/users/<%= data2[0].gambar_users %>" class="rounded-circle" alt="User Image">
+                    <!-- User Name -->
+                    <b class="ms-3">
+                        <%= data2[0].nama_panggilan_users %>
+                    </b>
+
+                </div>
+                <!-- Sidebar Menu -->
+                <ul class="nav flex-column text-center mt-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                <path fill="#025589"
+                                    d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20zm2-2h12v-.8q0-.275-.137-.5t-.363-.35q-1.35-.675-2.725-1.012T12 15t-2.775.338T6.5 16.35q-.225.125-.363.35T6 17.2zm6-8q.825 0 1.413-.587T14 8t-.587-1.412T12 6t-1.412.588T10 8t.588 1.413T12 10m0 8" />
+                            </svg>
+                            Akun saya
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="alamat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                <path fill="#025589"
+                                    d="M11 3a7 7 0 0 1 7 7v1h2v-1a9 9 0 1 0-18 0c0 3.637 2.218 6.876 4.262 9.112a28 28 0 0 0 3.797 3.44c.39.292.797.562 1.198.839l1.134-1.648c-.381-.262-.767-.517-1.137-.794a26 26 0 0 1-3.516-3.187C5.782 15.624 4 12.862 4 10a7 7 0 0 1 7-7m0 5a2 2 0 1 0 0 4a2 2 0 0 0 0-4m-4 2a4 4 0 1 1 8 0a4 4 0 0 1-8 0" />
+                                <path fill="#025589"
+                                    d="M19 12.75v1.376c.715.184 1.352.56 1.854 1.072l1.193-.689l1 1.732l-1.192.688a4 4 0 0 1 0 2.142l1.192.688l-1 1.732l-1.193-.689A4 4 0 0 1 19 21.874v1.376h-2v-1.376a4 4 0 0 1-1.854-1.072l-1.193.689l-1-1.732l1.192-.688a4 4 0 0 1 0-2.142l-1.192-.688l1-1.732l1.193.688A4 4 0 0 1 17 14.127V12.75zm-2.751 4.283a2 2 0 0 0-.25.967c0 .35.091.68.25.967l.036.063a2 2 0 0 0 3.43 0l.036-.063A2 2 0 0 0 20 18c0-.35-.09-.68-.249-.967l-.036-.063a2 2 0 0 0-3.43 0z" />
+                            </svg>
+                            Alamat
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pesanan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                <g fill="none" stroke="#025589" stroke-width="2">
+                                    <rect width="14" height="17" x="5" y="4" rx="2" />
+                                    <path stroke-linecap="round" d="M9 9h6m-6 4h6m-6 4h4" />
+                                </g>
+                            </svg>
+                            Pesanan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="riwayat">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                <path fill="#025589"
+                                    d="M12 21q-3.45 0-6.012-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m2.8-4.8L11 12.4V7h2v4.6l3.2 3.2z" />
+                            </svg>
+                            Riwayat
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="main-content">
+
+                    <!-- Profile Title and Description -->
+                    <div class="header">
+                        <h3>Alamat Saya</h3>
+                        <p>Kelola informasi profil Anda untuk mengontrol, melindungi, dan mengamankan akun</p>
+                    </div>
+                    <!-- Profile Form -->
+                    <div class="row mt-5">
+
+                        <table class="table text-center ">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < data.length; i++) { %>
+                                <td class="align-middle">
+                                    <b><small>
+                                            <%= data[i].nama_penerima %>
+                                            <%= data[i].no_telp_penerima %>
+                                        </small></b>
+                                </td>
+                                <td class="align-middle">
+                                    <small>
+                                        (<%= data[i].pengantaran %>)
+                                        <%= data[i].nama_alamat %>
+                                    </small>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="aksi-container position-relative" style="display: inline-block;">
+                                        <!-- Tombol Titik Tiga -->
+                                        <span class="aksi-toggle" style="cursor: pointer;"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                viewBox="0 0 40 40">
+                                                <g fill="#025589">
+                                                    <path
+                                                        d="M23.112 9.315a3.113 3.113 0 1 1-6.226.002a3.113 3.113 0 0 1 6.226-.002" />
+                                                    <circle cx="20" cy="19.999" r="3.112" />
+                                                    <circle cx="20" cy="30.685" r="3.112" />
+                                                </g>
+                                            </svg></span>
+                                        <!-- Menu Edit dan Hapus -->
+                                        <div class="aksi-menu"
+                                            style="display: none; position: absolute; top: 20px; right: 0; background: #fff; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 1000;">
+                                            <a href="#"
+                                                class="aksi-item d-block px-3 py-2 text-decoration-none text-dark"
+                                                style="white-space: nowrap;" data-bs-toggle="modal"
+                                                data-bs-target="#editModal" data-nama="<%= data[i].nama_penerima %>"
+                                                data-alamat="<%= data[i].nama_alamat %>"
+                                                data-telepon="<%= data[i].no_telp_penerima %>"
+                                                data-id="<%= data[i].id_alamat %>">Edit</a>
+                                            <a href="#"
+                                                class="aksi-item d-block px-3 py-2 text-decoration-none text-danger"
+                                                style="white-space: nowrap;">Hapus</a>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- Save Button -->
+                    <div class="d-grid gap-2 col-2 mx-auto">
+                        <button type="submit" class="btn btn-primary mr-2" data-bs-toggle="modal"
+                            data-bs-target="#tambahModal">Tambah</button>
+                    </div>
+
+                    <!-- Modal Edit Alamat -->
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="/alamat/update/" method="POST">
+
+                                    <input type="hidden" id="alamatId" name="id_alamat">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Edit Alamat</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama_penerima" class="form-label">Nama</label>
+                                            <input type="text" class="form-control" id="nama_penerima"
+                                                name="nama_penerima" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nama_alamat" class="form-label">Alamat</label>
+                                            <textarea class="form-control" id="nama_alamat" name="nama_alamat" rows="3"
+                                                required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="teleponEdit" class="form-label">No Telepon</label>
+                                            <input type="text" class="form-control" id="teleponEdit"
+                                                name="no_telp_penerima" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Modal Tambah Alamat -->
+                    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="editModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="/alamat/store/" method="POST">
+                                    <input type="hidden" id="alamatId" name="id_alamat">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel">Tambah Alamat</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlSelect2">Jenis Alamat</label>
+                                            <select class="form-control" id="exampleFormControlSelect2"
+                                                name="pengantaran" required>
+                                                <option>Pilih Pengantaran</option>
+                                                <option value="rsi">RSI</option>
+                                                <option value="umum">Umum</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nama_penerima" class="form-label">Nama Penerima</label>
+                                            <input type="text" class="form-control" id="nama_penerima"
+                                                name="nama_penerima" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nama_alamat" class="form-label">Alamat</label>
+                                            <textarea class="form-control" id="nama_alamat" name="nama_alamat" rows="3"
+                                                required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="teleponEdit" class="form-label">No Telepon</label>
+                                            <input type="text" class="form-control" id="teleponEdit"
+                                                name="no_telp_penerima" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <script>
+                        // Ambil semua elemen dengan class "aksi-container"
+                        document.querySelectorAll('.aksi-container').forEach(container => {
+                            const toggle = container.querySelector('.aksi-toggle'); // Tombol Titik Tiga
+                            const menu = container.querySelector('.aksi-menu'); // Menu Edit dan Hapus
+
+                            // Tambahkan event click pada tombol titik tiga
+                            toggle.addEventListener('click', () => {
+                                // Tampilkan atau sembunyikan menu
+                                const isVisible = menu.style.display === 'block';
+                                menu.style.display = isVisible ? 'none' : 'block';
+                            });
+
+                            // Sembunyikan menu saat klik di luar
+                            document.addEventListener('click', (e) => {
+                                if (!container.contains(e.target)) {
+                                    menu.style.display = 'none';
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+                    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+                    crossorigin="anonymous">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+                    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+                    crossorigin="anonymous">
+                </script>
+
+                <script type="text/javascript" src="js/mdb.min.js"></script>
+                <!-- Custom scripts -->
+                <script type="text/javascript" src="js/script.js"></script>
+            </div>
+            </body>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    // Cari semua tombol edit
+                    const editButtons = document.querySelectorAll('[data-bs-target="#editModal"]');
+
+                    // Tambahkan event listener ke setiap tombol edit
+                    editButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            // Ambil data dari atribut data-*
+                            const nama = button.getAttribute('data-nama');
+                            const alamat = button.getAttribute('data-alamat');
+                            const telepon = button.getAttribute('data-telepon');
+                            const id = button.getAttribute('data-id'); // Ambil ID alamat
+
+                            // Isi modal dengan data yang sesuai
+                            document.getElementById('nama_penerima').value = nama;
+                            document.getElementById('nama_alamat').value = alamat;
+                            document.getElementById('teleponEdit').value = telepon;
+                            document.getElementById('alamatId').value =
+                            id; // Set ID ke dalam input hidden
+                        });
+                    });
+                });
+            </script>
+
+</html>
+
+

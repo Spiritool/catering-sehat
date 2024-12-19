@@ -1,0 +1,112 @@
+<%- include('../partials/__head.ejs') %>
+
+    <body>
+        <div class="container-scroller">
+            <!-- partial:partials/_navbar.html -->
+            <%- include('../partials/__nav_catering.ejs') %>
+                <!-- partial -->
+                <!-- Tombol Floating Action Button untuk membuka right-sidebar -->
+                <button id="rightSidebarToggle" class="fab d-lg-none">
+                    <i class="icon-menu"></i> <!-- Ikon menu atau bisa diganti -->
+                </button>
+
+                <!-- Right Sidebar -->
+                <div id="rightSidebar" class="right-sidebar">
+                    <div class="right-sidebar-header">
+                        Best Seller
+                        <!-- Tombol Close hanya muncul pada layar kecil -->
+                        <button class="close-sidebar-btn d-lg-none" id="closeSidebarBtn">&times;</button>
+                    </div>
+
+                    <!-- Card Makanan -->
+                    <div class="right-sidebar-card">
+                        <h5>Makanan</h5>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <div class="card">
+                                    <img src="../../images/menu.png" class="card-img-top" alt="Healty Pecel">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title">Healty Pecel</h6>
+                                        <p class="card-text">Rp. 12.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="card">
+                                    <img src="../../images/menu.png" class="card-img-top" alt="Healty Pecel">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title">Healty Pecel</h6>
+                                        <p class="card-text">Rp. 12.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Minuman -->
+                    <div class="right-sidebar-card">
+                        <h5>Minuman</h5>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <div class="card">
+                                    <img src="../../images/menu.png" class="card-img-top" alt="Minuman A">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title">Minuman A</h6>
+                                        <p class="card-text">Rp. 10.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <div class="card">
+                                    <img src="../../images/menu.png" class="card-img-top" alt="Minuman B">
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title">Minuman B</h6>
+                                        <p class="card-text">Rp. 10.000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Script JavaScript untuk toggle right-sidebar -->
+                <script>
+                    const rightSidebarToggle = document.getElementById('rightSidebarToggle');
+                    const rightSidebar = document.getElementById('rightSidebar');
+                    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+
+                    // Fungsi untuk membuka sidebar
+                    rightSidebarToggle.addEventListener('click', function () {
+                        rightSidebar.classList.add('active');
+                        rightSidebarToggle.classList.add('hidden');
+                    });
+
+                    // Fungsi untuk menutup sidebar dari tombol close
+                    closeSidebarBtn.addEventListener('click', function () {
+                        rightSidebar.classList.remove('active');
+                        rightSidebarToggle.classList.remove('hidden');
+                    });
+                </script>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+            <h1 class="display-5 fw-bold">Temukan dan Nikmati Menu Sehat Favoritmu Setiap Hari!</h1>
+            <p class="lead"><small>Pilih dari beragam sajian lezat dan bergizi yang kami tawarkan. Mulai dari salad segar,
+                hidangan rendah kalori, hingga makanan kaya protein. Setiap menu dirancang untuk mendukung gaya hidup
+                sehatmu.</small></p>
+            <a href="#" class="btn btn-danger btn-lg">Mulai Memesan</a>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+            <img src="https://via.placeholder.com/400x300" alt="Chef" class="img-fluid rounded">
+        </div>
+    </div>
+</div>
+
+        </div>
+
+                <!-- container-scroller ends -->
+                <%- include('../partials/__foot.ejs') %>
+    </body>
+
+    </html>
