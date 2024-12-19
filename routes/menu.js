@@ -57,12 +57,11 @@ router.get('/create', async function (req, res, next) {
 
 router.post('/store', upload.single("gambar_menu"), async function (req, res, next) {
     try {
-        let {nama_menu, harga_menu, deskripsi_menu, stock, id_kategori} = req.body;
+        let {nama_menu, harga_menu, deskripsi_menu, id_kategori} = req.body;
         let Data = {
             nama_menu,
             harga_menu,
             deskripsi_menu,
-            stock,
             id_kategori,
             gambar_menu: req.file.filename
         }

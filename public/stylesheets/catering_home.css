@@ -141,99 +141,49 @@ p {
     flex-wrap: wrap; /* Agar kartu tersusun rapi dalam beberapa baris */
 }
 
-/* FLASH SALE */
-.flashsale {
-    max-height: 500px;
-    overflow-y: scroll; /* Scroll tapi scrollbar tidak terlihat */
-    -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
-    scrollbar-width: none; /* Untuk Firefox */
-  }
+/* Hover abu-abu pada Card Menu */
+.card-menu {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .flashsale-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px;
-    border-radius: 8px 8px 0 0;
-  }
-
-  .card-flashsale {
-    display: flex;
-    border: 1px solid #ddd;
-    margin-bottom: 15px;
+/* Overlay abu-abu */
+.card-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Tidak terlihat secara default */
+    transition: background-color 0.3s ease;
+    z-index: 1; /* Overlay memiliki z-index lebih rendah */
     border-radius: 8px;
-  }
-
-  .card-flashsale img {
-    width: 150px;
-    height: auto;
-    border-radius: 8px 0 0 8px;
-  }
-
-  .card-body-flashsale {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px;
-    width: 100%;
-    margin-left: 10px;
-  }
-
-  .flashsale-timer {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 5px;
-    border-radius: 0 5px 0 0;
-    font-size: 0.8rem;
-    text-align: right;
-    margin-bottom: 10px;
-    margin-top: -15px;
-    
-  }
-
-  .flashsale-footer {
-    background-color: var(--primary-color);
-    height: 20px;
-    border-radius: 0 0 8px 8px;
-  }
-
-  .price-original {
-    text-decoration: line-through;
-    color: black;
-    padding-right: 15px;
-  }
-
-  .price-discount {
-    color: red;
-    font-weight: bold;
-    padding-left: 50px;
-  }
-
-  .card-body-flashsale {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 15px;
-    width: 100%;
 }
 
-.input-group-wrapper {
-
-    margin-bottom: 10px; 
-    margin-left: 2rem;
+.card-menu:hover::before {
+    background-color: rgba(128, 128, 128, 0.1); /* Warna abu-abu dengan transparansi 50% */
+    border-radius: 8px;
 }
 
-.pesan {
-    max-width:100px;
-    padding-left: 10px;
-    
+.card-menu:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menambahkan sedikit shadow */
 }
 
-.btn-pesan {
-    background-color: var(--primary-color);
-    color: white;
-    width: 100px;
-
+/* Elemen link gambar */
+.card-menu a {
+    position: relative;
+    z-index: 2; /* Pastikan elemen a berada di atas overlay */
+    display: block; /* Memastikan area klik mencakup seluruh gambar */
 }
+
+.card-body-menu {
+    position: relative;
+    z-index: 3; /* Pastikan konten tetap berada di atas overlay */
+}
+
 
 /* PRODUK TERLARIS */
 .card-title {
