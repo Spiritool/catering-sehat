@@ -98,17 +98,17 @@
                         </div>
                         <div class="carousel-inner rounded-3">
                             <div class="carousel-item active">
-                                <img src="../images/catering.png" class="d-block w-100" alt="Slide 1">
+                                <img src="../../desain/carousel.png" class="d-block w-100" alt="Slide 1">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../images/catering.png" class="d-block w-100" alt="Slide 2">
+                                <img src="../../desain/carousel.png" class="d-block w-100" alt="Slide 2">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="../images/catering.png" class="d-block w-100" alt="Slide 3">
+                                <img src="../../desain/carousel.png" class="d-block w-100" alt="Slide 3">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -129,15 +129,15 @@
                 <!-- Cards Section -->
                 <div class="col-lg-5">
                     <!-- Card 1: SPOT PRODUK TERLARIS -->
-                    <div class="card mt-2 mb-2" style="height: 45%; background-color: #4E88AD;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">*SPOT PRODUK TERLARIS</h5>
+                    <div class="card mt-2 mb-2" style="height: 44%; padding: 0; margin: 0; border: none;">
+                        <div class="card-body p-0">
+                            <img src="../../desain/promo1.png" class="d-block w-100 h-100" style="margin: 0; padding: 0; border: none;">
                         </div>
                     </div>
                     <!-- Card 2: SPOT PRODUK DISKON -->
-                    <div class="card" style="height: 45%; background-color: #4E88AD;">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">*SPOT PRODUK DISKON</h5>
+                    <div class="card" style="height: 44%; padding: 0; margin: 0; border: none;">
+                        <div class="card-body p-0">
+                            <img src="../../desain/promo2.png" class="d-block w-100 h-100" style="margin: 0; padding: 0; border: none;">
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
         <div class="row">
 
             <!-- KATEGORI MENU -->
-            <div class="col-lg-8">
+            <div class="col">
                 <div class="container border rounded-3 bg-white">
                     <!-- Bagian Judul -->
                     <div class="category-title">
@@ -155,22 +155,22 @@
                     </div>
                     <!-- Bagian Navbar Button -->
                     <div class="container my-3">
-                        <div class="d-flex justify-content-center nav-category">
-                            <button class="btn btn-primary"
+                        <div class="d-flex justify-content-start nav-category">
+                            <button class="btn btn-sm btn-primary"
                                 onclick="filterMenu('all')"><small>Semua</small></button>
-                            <button class="btn btn-outline-primary"
+                            <button class="btn btn-sm btn-outline-primary"
                                 onclick="filterMenu('makanan')"><small>Makanan</small></button>
-                            <button class="btn btn-outline-primary"
+                            <button class="btn btn-sm btn-outline-primary"
                                 onclick="filterMenu('minuman')"><small>Minuman</small></button>
-                            <button class="btn btn-outline-primary"
+                            <button class="btn btn-sm btn-outline-primary"
                                 onclick="filterMenu('snack')"><small>Snack</small></button>
-                            <button class="btn btn-outline-primary"
+                            <button class="btn btn-sm btn-outline-primary"
                                 onclick="filterMenu('lainnya')"><small>Lainnya</small></button>
                         </div>
                     </div>
                     <!-- Bagian Card Menu -->
                     <div class="container container-card">
-                        <div class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
+                        <div class="row row-cols-2 row-cols-md-5 g-4 justify-content-center">
                             <!-- Card 1 - Kategori Makanan -->
                             <% for(var i=0; i < data.length; i++){ %>
                             <div class="col card-kategori <%= data[i].nama_kategori %>">
@@ -181,7 +181,7 @@
                                     <div class="card-body-menu">
                                         <h5 class="card-title"><%= data[i].nama_menu %></h5>
                                         <p class="card-text"><%= data[i].harga_menu %></p>
-                                        <div class="d-md-flex justify-content-md-end"><small>99 Terjual</small></div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -191,128 +191,7 @@
                 </div>
             </div>
 
-            <!-- FLASH SALE -->
-            <div class="col-lg-4">
-                <div class="container-flashsale bg-white border rounded">
-                    <!-- Header Flash Sale -->
-                    <div class="flashsale-header">
-                        <h5 class="mb-0"><b>Flash Sale</b></h5>
-                        <small>Berikut Daftar Produk Yang Sedang Flash Sale</small>
-                    </div>
-
-                    <!-- Daftar Produk Flash Sale -->
-                    <div class="flashsale p-3">
-                        <!-- Card Produk 1 -->
-                        <div class="card-flashsale">
-                            <div class="row">
-                                <div class="col-4 ">
-                                    <img src="../images/menu.jpg" class="card-img-left px-3 py-3 border" style="width: 9rem; height: 9.1rem;" alt="Menu Image">
-                                    <div class="input-group-wrapper">
-                                    <div class="input-group input-group-sm mt-2 ">
-                                        <button class="btn btn-outline-secondary btn-sm btn-minus" type="button"  style="width: 1.4rem; height: 1.6rem;">-</button>
-                                        <input type="text" class="form-control text-center quantity-input"  value="1" style="width: 1.5rem; height: 1.6rem; font-size: 0.70rem;">
-                                        <button class="btn btn-outline-secondary btn-sm btn-plus" type="button"  style="width: 1.4rem; height: 1.6rem;">+</button>
-                                    </div>
-                                </div>
-                                </div>
-                        
-                                <div class="col-8 px-3">
-                                    <div class="card-body-flashsale">
-                                        <div class="row">
-                                            <div class="flashsale-timer">04:27:54</div>
-                                            <h6 class="mb-1">Healthy Pecel</h6>
-                                            <div class="col">
-                                                <p class="mb-1 mt-3"><span class="price-original">Rp. 12.000</span></p>
-                                                <p><span class="price-discount">Rp. 9.000</span></p>
-                                            
-                        
-                                            
-                                                <div class="pesan">
-                                                    <a class="btn btn-pesan btn-sm  " href="catering/checkout">Pesan</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card Produk 2 -->
-                        <div class="card-flashsale">
-                            <div class="row">
-                                <div class="col-4 ">
-                                    <img src="../images/menu.jpg" class="card-img-left px-3 py-3 border" style="width: 9rem; height: 9.1rem;" alt="Menu Image">
-                                    <div class="input-group-wrapper">
-                                        <div class="input-group input-group-sm mt-2 ">
-                                            <button class="btn btn-outline-secondary btn-sm btn-minus" type="button"  style="width: 1.4rem; height: 1.6rem;">-</button>
-                                            <input type="text" class="form-control text-center quantity-input"  value="1" style="width: 1.5rem; height: 1.6rem; font-size: 0.70rem;">
-                                            <button class="btn btn-outline-secondary btn-sm btn-plus" type="button"  style="width: 1.4rem; height: 1.6rem;">+</button>
-                                        </div>
-                                </div>
-                                </div>
-                        
-                                <div class="col-8 px-3">
-                                    <div class="card-body-flashsale">
-                                        <div class="row">
-                                            <div class="flashsale-timer">04:27:54</div>
-                                            <h6 class="mb-1">Healthy Pecel</h6>
-                                            <div class="col">
-                                                <p class="mb-1 mt-3"><span class="price-original">Rp. 12.000</span></p>
-                                                <p><span class="price-discount">Rp. 9.000</span></p>
-                                            
-                        
-                                            
-                                                <div class="pesan">
-                                                    <a class="btn btn-pesan btn-sm  " href="catering/checkout">Pesan</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-
-                        <!-- Card Produk 3 -->
-                        <div class="card-flashsale">
-                            <div class="row">
-                                <div class="col-4 ">
-                                    <img src="../images/menu.jpg" class="card-img-left px-3 py-3 border" style="width: 9rem; height: 9.1rem;" alt="Menu Image">
-                                    <div class="input-group-wrapper">
-                                        <div class="input-group input-group-sm mt-2 ">
-                                            <button class="btn btn-outline-secondary btn-sm btn-minus" type="button"  style="width: 1.4rem; height: 1.6rem;">-</button>
-                                            <input type="text" class="form-control text-center quantity-input"  value="1" style="width: 1.5rem; height: 1.6rem; font-size: 0.70rem;">
-                                            <button class="btn btn-outline-secondary btn-sm btn-plus" type="button"  style="width: 1.4rem; height: 1.6rem;">+</button>
-                                        </div>
-                                </div>
-                                </div>
-                        
-                                <div class="col-8 px-3">
-                                    <div class="card-body-flashsale">
-                                        <div class="row">
-                                            <div class="flashsale-timer">04:27:54</div>
-                                            <h6 class="mb-1">Healthy Pecel</h6>
-                                            <div class="col">
-                                                <p class="mb-1 mt-3"><span class="price-original">Rp. 12.000</span></p>
-                                                <p><span class="price-discount">Rp. 9.000</span></p>
-                                            
-                        
-                                            
-                                                <div class="pesan">
-                                                    <a class="btn btn-pesan btn-sm  " href="catering/checkout">Pesan</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footer -->
-                    <div class="flashsale-footer"></div>
-                </div>
-            </div>
+            
         </div>
 
         <!-- PRODUK TERLARIS -->
