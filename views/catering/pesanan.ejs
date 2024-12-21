@@ -156,10 +156,16 @@
 
                     <!-- Accordion untuk daftar pesanan -->
                     <div class="accordion accordion-flush mt-2" id="pesananAccordion">
-                        <!-- Pesanan 1 -->
+                        <!-- Pesanan -->
+                        <% for (var i = 0; i < data.length; i++) { %>
+                        <!-- Ambil data yang relevan -->
+                        <% var filteredData2 = data2.filter(item => item.id_checkout === data[i].id_checkout); %>
+                        <% var totalJumlah = 0; %>
+                        <% if (filteredData2.length > 0) { %>
+                            <% totalJumlah = filteredData2.reduce((sum, item) => sum + item.jumlah, 0); %>
+                        <% } %>
+                    
                         <div class="accordion-item border mb-3">
-                            <!-- Tambahkan margin-bottom -->
-                            <% for (var i = 0; i < data.length; i++) { %>
                             <h2 class="accordion-header d-flex align-items-center" id="pesanan<%= i %>Header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#pesanan<%= i %>" aria-expanded="false"
@@ -172,10 +178,10 @@
                                             <b><small><%= data[i].tanggal_checkout %></small></b>
                                         </div>
                                         <div class="col-md-2">
-                                            <b><small>30 Pcs</small></b>
+                                            <b><small><%= totalJumlah %> item</small></b>
                                         </div>
                                         <div class="col-md-2">
-                                            <b><small><%= data[i].total_harga %></small></b>
+                                            <b><small>Rp. <%= data[i].total_harga %></small></b>
                                         </div>
                                         <div class="col-md-2">
                                             <b><small>Proses</small></b>
@@ -183,15 +189,12 @@
                                     </div>
                                 </button>
                             </h2>
-
+                    
                             <!-- Accordion Collapse -->
                             <div id="pesanan<%= i %>" class="accordion-collapse collapse"
                                 aria-labelledby="pesanan<%= i %>Header" data-bs-parent="#pesananAccordion">
                                 <div class="accordion-body">
-
-                                    <!-- Filter data2 berdasarkan id_checkout -->
-                                    <% var filteredData2 = data2.filter(item => item.id_checkout === data[i].id_checkout); %>
-
+                    
                                     <% if (filteredData2.length > 0) { %>
                                     <table class="table">
                                         <thead>
@@ -209,7 +212,6 @@
                                                         class="rounded-circle me-3"> 
                                                         <%= filteredData2[j].nama_menu %>
                                                         <%= filteredData2[j].kategori_pesanan %>
-                                                        <%= filteredData2[j].harga_menu %>
                                                 </td>
                                                 <td><%= filteredData2[j].jumlah %></td>
                                                 <td>Rp. <%= filteredData2[j].harga_menu * filteredData2[j].jumlah %></td>
@@ -218,15 +220,17 @@
                                         </tbody>
                                     </table>
                                     <% } %>
-
+                    
                                     <div class="d-flex justify-content-end">
                                         <button class="btn btn-danger">Batalkan</button>
                                     </div>
-
+                    
                                 </div>
                             </div>
-                            <% } %>
                         </div>
+                        <% } %>
+                    </div>
+                    
 
                     </div>
                 </div>
