@@ -22,13 +22,17 @@ router.get('/', async (req, res, next) => {
     try {
         let id = req.session.userId;
         let rows = await Model_Menu.getAll();
+        // Ambil menu terbaru (misalnya 5 menu terbaru)
+        let produkTerbaru = await queryPromise('SELECT * FROM menu ORDER BY id_menu DESC LIMIT 6');
         let rows2 = await Model_Users_Kantin.getId(id);
         res.render('catering/beranda', {
-            data: rows,
-            data2: rows2,
+            data: rows,             // Semua menu
+            data2: rows2,           // Data user
+            produkTerbaru: produkTerbaru // Produk terbaru
         });
     } catch (error) {
         console.log(error);
+        res.status(500).send("Terjadi kesalahan pada server.");
     }
 });
 
@@ -154,10 +158,12 @@ router.get('/pesanan', async (req, res, next) => {
         let id = req.session.userId;
         let rows = await Model_Pembayaran.getPesanan(id);
         let rows2 = await Model_Pembayaran.getMenu(id);
+        let rows3 = await Model_Users_Kantin.getId(id)
         res.render('catering/pesanan', {
             id: id,
             data: rows, 
             data2: rows2,
+            data3: rows3
         });
     } catch (error) {
         res.redirect('/loginkantin');
