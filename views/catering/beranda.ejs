@@ -194,180 +194,33 @@
             
         </div>
 
-        <!-- PRODUK TERLARIS -->
-        <div class="container-produk border bg-white mt-5 rounded-3 py-4 px-4">
-            <h5 class="mb-4"><b>PRODUK TERLARIS</b></h5>
-            <div id="topProductsCarousel" class="carousel slide px-4" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <!-- Card 1 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
+<!-- PRODUK TERBARU -->
+<div class="container-produk border bg-white mt-5 rounded-3 py-4 px-4">
+    <h5 class="mb-4"><b>PRODUK TERBARU</b></h5>
+    <div id="topProductsCarousel" class="carousel slide px-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="row">
+                    <% for (let i = 0; i < produkTerbaru.length; i++) { %>
+                        <div class="col-md-2">
+                            <div class="card-produk rounded-3">
+                                <img src="../images/menu/<%= produkTerbaru[i].gambar_menu %>" class="card-img-top" alt="<%= produkTerbaru[i].nama_menu %>">
+                                <div class="card-body-produk">
+                                    <h5 class="card-title"><%= produkTerbaru[i].nama_menu %></h5>
+                                    <p class="card-price">Rp. <%= produkTerbaru[i].harga_menu %></p>
+                                    <p class="card-sold">Baru ditambahkan</p>
                                 </div>
-                            </div>
-                            <!-- Card 2 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 3 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 4 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 5 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 6 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
+                                <a href="../menu/detail/<%= produkTerbaru[i].id_menu %>" class="btn-pesan">Pesan</a>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="carousel-item">
-                        <div class="row">
-                            <!-- Card 7 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 8 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 9 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 10 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 11 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                            <!-- Card 12 -->
-                            <div class="col-md-2">
-                                <div class="card-produk rounded-3">
-                                    <img src="../images/menu.jpg" class="card-img-top" alt="Healthy Fried Rice">
-                                    <div class="card-body-produk">
-                                        <h5 class="card-title">Healty fried rice</h5>
-                                        <p class="card-price">Rp. 15.000</p>
-                                        <p class="card-sold">Terjual 40pcs/bulan</p>
-                                    </div>
-                                    <a href="me" class="btn-pesan">Pesan</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <% } %>
                 </div>
-                <!-- Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#topProductsCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#topProductsCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
+        <!-- Controls -->
+    </div>
+</div>
+
 
 
 
