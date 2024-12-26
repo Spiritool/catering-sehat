@@ -184,7 +184,7 @@
                                             <b><small>Rp. <%= data[i].total_harga %></small></b>
                                         </div>
                                         <div class="col-md-2">
-                                            <b><small>Proses</small></b>
+                                            <b><small><%= data[i].status_pemesanan %></small></b>
                                         </div>
                                     </div>
                                 </button>
@@ -222,8 +222,12 @@
                                     <% } %>
                     
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-danger">Batalkan</button>
+                                        <form action="/catering/batal/<%= data[i].id_checkout %>" method="POST" class="m-0">
+                                            <button type="submit" class="btn btn-danger">Batalkan</button>
+                                        </form>
                                     </div>
+                                    
+                                    
                     
                                 </div>
                             </div>

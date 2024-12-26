@@ -140,7 +140,7 @@ router.get('/profil', async (req, res, next) => {
 router.get('/alamat', async (req, res, next) => {
     try {
         let id = req.session.userId;
-        let rows = await Model_Alamat.getAll();
+        let rows = await Model_Alamat.getId(id);
         let rows2 = await Model_Users_Kantin.getId(id);
         res.render('catering/alamat', {
             id: id,
@@ -171,21 +171,40 @@ router.get('/pesanan', async (req, res, next) => {
     }
 });
 
+router.post('/batal/(:id)', async function (req, res, next) {
+    try {
+        let id = req.params.id;
+        let Data = {
+            status_pemesanan : 'batal'
+        }
+        await Model_Pembayaran.Batal(id, Data);
+        console.log(Data);
+        req.flash('success', 'Berhasil mengubah data');
+        res.redirect('/catering/pesanan')
+    } catch(error) {
+        req.flash('error', 'terjadi kesalahan pada fungsi', error);
+        res.redirect('/pembayaran');
+    }
+})
+
 router.get('/riwayat', async (req, res, next) => {
     try {
         let id = req.session.userId;
-        let rows = await Model_Menu.getAll();
+        let rows = await Model_Pembayaran.getRiwayat(id);
         let rows2 = await Model_Users_Kantin.getId(id);
+        let rows3 = await Model_Pembayaran.getDetailRiwayat(id);
         res.render('catering/riwayat', {
             id: id,
             data: rows,
             data2: rows2,
+            data3: rows3,
         });
     } catch (error) {
         res.redirect('/loginkantin');
         console.log(error);
     }
 });
+
 
 router.post('/update-quantity', async (req, res) => {
     const {
@@ -235,7 +254,7 @@ router.post('/checkout/pesanan', async (req, res) => {
             const updatePromises = items.map(item => {
                 return new Promise((resolve, reject) => {
                     connection.query(
-                        `UPDATE pembayaran SET id_checkout = ?, id_alamat = ?, status_pemesanan = 'dimasak' WHERE id_pembayaran = ?`,
+                        `UPDATE pembayaran SET id_checkout = ?, id_alamat = ? WHERE id_pembayaran = ?`,
                         [id_checkout, id_alamat, item.id_pembayaran],
                         (error, results) => {
                             if (error) return reject(error);

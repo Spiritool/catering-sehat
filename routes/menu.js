@@ -168,7 +168,6 @@ router.post('/pesan/:id', async function (req, res, next) {
             id_menu: id,
             id_users: id_users,
             kategori_pesanan,
-            status_pemesanan: 'order',
             jumlah,
         }
         console.log(req.body);

@@ -7,15 +7,18 @@ const Model_Users = require("../Model/Model_Users.js");
 router.get('/', async (req, res, next) => {
     try {
         let id = req.session.userId;
-        let rows = await Model_Pembayaran.getAll();
-        let rows2 = await Model_Users.getId(id);
+        let rows = await Model_Pembayaran.getPesananAdmin(id);
+        let rows2 = await Model_Pembayaran.getMenu(id);
+        let rows3 = await Model_Users.getId(id)
         res.render('pembayaran/index', {
-            data: rows,
-            data2: rows2
-            
+            id: id,
+            data: rows, 
+            data2: rows3,
+            data3: rows2
         });
     } catch (error) {
-        next(error);
+        res.redirect('/login');
+        console.log(error);
     }
 });
 
@@ -57,26 +60,31 @@ router.get('/', async (req, res, next) => {
 // });
 
 
-router.get("/edit/:id", async (req, res, next) => {
+router.get("/detail/:id_users/:id_checkout", async (req, res, next) => {
     try {
-        const id = req.params.id;
-        let rows = await Model_Pembayaran.getId(id);
-        let rows2 = await Model_Menu.getAll();
-        let rows3 = await Model_Users.getAll();
+        let id = req.session.userId;
+        const id_users = req.params.id_users;
+        const id_checkout = req.params.id_checkout;
+        console.log('id_users:', id_users, 'id_checkout:', id_checkout);  // Log untuk memastikan parameter yang diterima
+        let rows = await Model_Pembayaran.getDetailMenu(id_checkout, id_users);
+        let rows2 = await Model_Users.getId(id);
         if (rows.length > 0) {
-            res.render("pembayaran/edit", {
+            res.render("pembayaran/detail", {
                 id: id,
-                data: rows[0],
-                data_menu: rows2,
-                data_users: rows3,
+                data: rows,
+                data2: rows2,
             });
+        } else {
+            res.status(404).send('Detail not found');
         }
     } catch (error) {
-        console.log(error);
+        console.error('Error in /detail/:id_users/:id_checkout route:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
 
-router.post("/update/:id", async (req, res, next) => {
+
+router.post("/update/:id_users/:id_checkout", async (req, res, next) => {
     try {
         const id = req.params.id;
         let {status_pemesanan, jumlah, id_menu, id_users} = req.body;
@@ -97,6 +105,24 @@ router.post("/update/:id", async (req, res, next) => {
     }
 });
 
+router.post('/update/(:id)', async function (req, res, next) {
+    try {
+        let id = req.params.id;
+        let { status_pemesanan } = req.body;
+        let Data = {
+            status_pemesanan
+        }
+        await Model_Pembayaran.Update(id, Data);
+        console.log(Data);
+        req.flash('success', 'Berhasil mengubah data');
+        res.redirect('/pembayaran')
+    } catch(error) {
+        req.flash('error', 'terjadi kesalahan pada fungsi', error);
+        res.redirect('/pembayaran');
+    }
+})
+
+
 router.get('/delete/:id', async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -110,19 +136,23 @@ router.get('/delete/:id', async (req, res, next) => {
     }
 });
 
-// router.get('/users', async function (req, res, next) {
-//     try {
-//         // let level_users = req.session.level;
-//         let id = req.session.userId;
-//         let rows = await Model_Dokter.getAll();
-//         res.render('dokter/users/index', {
-//         })
-//     } catch (error) {
-//         console.error("Error:", error);
-//         req.flash('invalid', 'Terjadi kesalahan saat memuat data pengguna');
-//         res.redirect('/login');
-//     }
-// });
+router.get('/riwayat', async (req, res, next) => {
+    try {
+        let id = req.session.userId;
+        let rows = await Model_Pembayaran.getRiwayatAdmin(id);
+        let rows2 = await Model_Pembayaran.getMenu(id);
+        let rows3 = await Model_Users.getId(id)
+        res.render('pembayaran/index', {
+            id: id,
+            data: rows, 
+            data2: rows3,
+            data3: rows2
+        });
+    } catch (error) {
+        res.redirect('/login');
+        console.log(error);
+    }
+});
 
 
 module.exports = router;

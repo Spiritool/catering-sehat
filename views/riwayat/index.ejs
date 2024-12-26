@@ -31,18 +31,7 @@
                                                 <td><%= data[i].nama_alamat %></td>
                                                 <td><%= data[i].total_harga %></td>
                                                 <td><%= data[i].total_pesanan %></td>
-                                                <td>
-                                                    <form action="/pembayaran/update/<%= data[i].id_checkout %>" method="POST">
-                                                        <select name="status_pemesanan" class="form-select form-select-sm" onchange="this.form.submit()" >
-                                                            <option value="dimasak" <%= data[i].status_pemesanan === 'dimasak' ? 'selected' : '' %>>Dimasak</option>
-                                                            <option value="diantar" <%= data[i].status_pemesanan === 'diantar' ? 'selected' : '' %>>Diantar</option>
-                                                            <option value="selesai" <%= data[i].status_pemesanan === 'selesai' ? 'selected' : '' %>>Selesai</option>
-                                                            <option value="batal" <%= data[i].status_pemesanan === 'batal' ? 'selected' : '' %>>Batal</option>
-                                                        </select>
-                                                    </form>
-                                                </td>
-
-                                                                                       
+                                                <td><%= data[i].status_pemesanan %></td>
                                                 <td>
                                                     <a href="/pembayaran/detail/<%= data[i].id_users %>/<%= data[i].id_checkout %>" 
                                                        class="btn btn-sm btn-warning">Isi Pesanan</a>

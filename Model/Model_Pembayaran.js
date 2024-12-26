@@ -56,12 +56,27 @@ class Model_Pembayaran {
 
     static async Update(id, Data) {
         return new Promise((resolve, reject) => {
-            connection.query('update pembayaran set ? where id_pembayaran =' + id, Data, function (err, result) {
+            connection.query('update checkout set ? where id_checkout =' + id, Data, function (err, result) {
                 if (err) {
                     reject(err);
                     console.log(err);
                 } else {
                     resolve(result);
+                    console.log(result);
+                }
+            })
+        });
+    }
+
+    static async Batal(id, Data) {
+        return new Promise((resolve, reject) => {
+            connection.query('update checkout set ? where id_checkout =' + id, Data, function (err, result) {
+                if (err) {
+                    reject(err);
+                    console.log(err);
+                } else {
+                    resolve(result);
+                    console.log(result);
                 }
             })
         });
@@ -103,7 +118,7 @@ class Model_Pembayaran {
                 SELECT a.id_checkout, a.*   
                 FROM checkout AS a
                 LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
-                WHERE b.id_users=?
+                WHERE b.id_users=? AND a.status_pemesanan!='selesai' AND a.status_pemesanan!='batal' 
                 GROUP BY a.id_checkout
             `, [id], (err, rows) => {
                 if (err) {
@@ -132,6 +147,117 @@ class Model_Pembayaran {
             })
         })
     }
+
+    static async getRiwayat(id) {
+        return new Promise((resolve, reject) => {
+            connection.query(`
+                SELECT a.id_checkout, a.*   
+                FROM checkout AS a
+                LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
+                WHERE b.id_users=? AND status_pemesanan='selesai' OR status_pemesanan='batal'
+                GROUP BY a.id_checkout Order by status_pemesanan asc
+            `, [id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
+    static async getDetailRiwayat(id) {
+        return new Promise((resolve, reject) => {
+            connection.query(`
+                SELECT a.*, b.*, c.*
+                FROM checkout AS a
+                LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
+                left Join menu as c on c.id_menu = b.id_menu
+                WHERE b.id_users=?
+            `, [id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
+    static async getPesananAdmin(id) {
+        return new Promise((resolve, reject) => {
+            connection.query(`
+                SELECT 
+                    a.id_checkout, 
+                    a.*, 
+                    MAX(b.id_users) AS id_users, 
+                    MAX(d.nama_alamat) AS nama_alamat, 
+                    MAX(c.nama_users) AS nama_users,
+                    (SELECT SUM(b.jumlah) 
+                    FROM pembayaran AS b 
+                    WHERE b.id_checkout = a.id_checkout) AS total_pesanan
+                FROM checkout AS a
+                LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
+                LEFT JOIN userskantin AS c ON c.id_users = b.id_users
+                LEFT JOIN alamat as d on d.id_alamat = b.id_alamat
+                WHERE a.status_pemesanan != 'selesai' AND a.status_pemesanan != 'batal'
+                GROUP BY a.id_checkout;
+            `, [id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
+    static async getDetailMenu(id_checkout, id_users) {
+        return new Promise((resolve, reject) => {
+            connection.query(`
+                SELECT a.*, b.*, c.*
+                FROM checkout AS a
+                LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
+                LEFT JOIN menu AS c ON c.id_menu = b.id_menu
+                WHERE b.id_users = ? AND a.id_checkout = ?
+            `, [id_users, id_checkout], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
+    static async getRiwayatAdmin(id) {
+        return new Promise((resolve, reject) => {
+            connection.query(`
+                SELECT 
+                    a.id_checkout, 
+                    a.*, 
+                    MAX(b.id_users) AS id_users, 
+                    MAX(d.nama_alamat) AS nama_alamat, 
+                    MAX(c.nama_users) AS nama_users,
+                    (SELECT SUM(b.jumlah) 
+                    FROM pembayaran AS b 
+                    WHERE b.id_checkout = a.id_checkout) AS total_pesanan
+                FROM checkout AS a
+                LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
+                LEFT JOIN userskantin AS c ON c.id_users = b.id_users
+                LEFT JOIN alamat as d on d.id_alamat = b.id_alamat
+                WHERE a.status_pemesanan != 'dimasak' AND a.status_pemesanan != 'diantar'
+                GROUP BY a.id_checkout;
+            `, [id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+    
 
 }
 

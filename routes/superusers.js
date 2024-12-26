@@ -1,5 +1,5 @@
 var express = require("express");
-const Model_Users = require("../model/Model_Users");
+const Model_Users = require("../Model/Model_Users");
 var router = express.Router();
 
 /* GET users listing. */

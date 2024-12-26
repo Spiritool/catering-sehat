@@ -262,7 +262,7 @@
                     // Mengelola hasil redirect langsung dari backend
                     if (response.redirected) {
                         console.log('Redirecting to:', response.url);
-                        window.location.href = "/catering/keranjang"; // Ikuti URL redirect dari backend
+                        window.location.href = "/catering/pesanan"; // Ikuti URL redirect dari backend
                     } else {
                         const result = await response.json();
                         console.error('Checkout gagal:', result.message);

@@ -1,0 +1,51 @@
+<%- include('../partials/__head.ejs') %>
+<body>
+<div class="container-scroller">
+    <%- include('../partials/__nav.ejs') %>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Data Pesanan</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Menu</th>
+                                                <th>Status Pesanan</th>
+                                                <th>Harga</th>
+                                                <th>Jumlah</th>
+                                                <th>Total Harga</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i < data.length; i++){ %>
+                                            <tr>
+                                                <th scope="row"><%= (i + 1) %></th>
+                                                <td><%= data[i].nama_menu %></td>
+                                                <td><%= data[i].status_pemesanan %></td>
+                                                <td><%= data[i].harga_menu %></td>
+                                                <td><%= data[i].jumlah %></td>
+                                                <td>
+                                                    <%= data[i].harga_menu * data[i].jumlah %>  <!-- Menghitung total harga -->
+                                                </td>
+                                                
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/__foot.ejs') %>
+</body>
