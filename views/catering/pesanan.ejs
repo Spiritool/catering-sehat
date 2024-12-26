@@ -181,9 +181,11 @@
                                             <b><small><%= totalJumlah %> item</small></b>
                                         </div>
                                         <div class="col-md-2">
-                                            <b><small>Rp. <%= data[i].total_harga %></small></b>
-                                        </div>
-                                        <div class="col-md-2">
+                                            <b>
+                                                <small class="rupiah" data-price="<%= data[i].total_harga %>"></small>
+                                            </b>
+                                        </div>                                        
+                                        <div class="col-md-2 rupiah">
                                             <b><small><%= data[i].status_pemesanan %></small></b>
                                         </div>
                                     </div>
@@ -214,7 +216,10 @@
                                                         <%= filteredData2[j].kategori_pesanan %>
                                                 </td>
                                                 <td><%= filteredData2[j].jumlah %></td>
-                                                <td>Rp. <%= filteredData2[j].harga_menu * filteredData2[j].jumlah %></td>
+                                                <td class="rupiah" data-price="<%= filteredData2[j].harga_menu * filteredData2[j].jumlah %>">
+                                                    <!-- Harga akan diformat otomatis oleh JavaScript -->
+                                                </td>
+                                                
                                             </tr>
                                             <% } %>
                                         </tbody>
@@ -253,6 +258,28 @@
     <!-- Custom scripts -->
     <script type="text/javascript" src="../js/script.js"></script>
 </div>
+
+<script>
+    // Fungsi untuk format angka ke format Rupiah
+    function formatRupiah(angka) {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(angka).replace(",00", "");
+    }
+
+    // Menunggu hingga DOM sepenuhnya dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil semua elemen dengan kelas 'rupiah'
+        let rupiahElements = document.querySelectorAll('.rupiah');
+        
+        // Untuk tiap elemen, format harga dan tampilkan
+        rupiahElements.forEach(function(element) {
+            let price = parseFloat(element.getAttribute('data-price')); // Ambil harga dari atribut 'data-price'
+            if (!isNaN(price)) {
+                element.innerHTML = formatRupiah(price); // Format harga dan tampilkan
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>
