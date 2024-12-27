@@ -114,7 +114,9 @@
                                     <div class="d-flex flex-column ms-3">
                                         <small class="nama text-primary"><%= data[i].nama_menu %></small>
                                         <small class="opsi text-success"><%= data[i].kategori_pesanan %></small>
-                                        <small class="harga text-danger"><%= data[i].harga_menu %></small>
+                                        <small class="harga text-danger" data-price="<%= data[i].harga_menu %>">
+                                            Rp. <%= data[i].harga_menu %>
+                                        </small>
                                     </div>
                                 </div>
                             </td>
@@ -283,9 +285,16 @@
             const totalElement = document.getElementById('total');
             const discountRate = 0;
 
+            // Fungsi untuk format angka ke Rupiah
+            function formatRupiah(angka) {
+                return `Rp. ${angka.toLocaleString('id-ID')}`;
+            }
+
+            // Fungsi untuk memperbarui harga total per menu dan subtotal
             function updateTotal() {
                 let subtotal = 0;
 
+                // Memperbarui subtotal berdasarkan checkbox yang dicentang
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const priceElement = checkbox.closest('tr').querySelector('.total-harga');
@@ -295,17 +304,38 @@
                     }
                 });
 
+                // Menghitung diskon dan total keseluruhan
                 const discount = subtotal * discountRate;
                 const total = subtotal - discount;
 
-                subtotalElement.textContent = `Rp. ${subtotal.toLocaleString('id-ID')}`;
-                totalElement.textContent = `Rp. ${total.toLocaleString('id-ID')}`;
+                // Memperbarui subtotal dan total
+                subtotalElement.textContent = formatRupiah(subtotal);
+                totalElement.textContent = formatRupiah(total);
             }
 
+            // Format harga-menu saat halaman dimuat
+            document.querySelectorAll('.harga-menu').forEach(hargaMenuElement => {
+                const rawPrice = parseInt(hargaMenuElement.getAttribute('data-price'), 10) || 0;
+                hargaMenuElement.textContent = formatRupiah(rawPrice);
+            });
+
+            // Menambahkan event listener untuk checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateTotal);
             });
+
+            // Menambahkan event listener untuk input jumlah
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('input', updateTotal);
+                input.addEventListener('change', updateTotal);
+            });
+
+            // Perbarui total saat halaman dimuat
+            window.onload = function () {
+                updateTotal();
+            };
         </script>
+
 
         <script>
             // Fungsi untuk memperbarui total harga per item

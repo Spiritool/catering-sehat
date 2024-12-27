@@ -165,7 +165,7 @@
                                 <span class="jumlah"><%= item.jumlah %></span>
                             </td>
                             <td class="total-harga text-danger">
-                                Rp. <span><%= item.harga_menu * item.jumlah %></span>
+                                <span><%= item.harga_menu * item.jumlah %></span>
                             </td>
                         </tr>
                         <% }); %>
@@ -274,6 +274,34 @@
                 }
             });
         </script>
+
+<script>
+    // Fungsi untuk format angka ke Rupiah
+    function formatRupiah(angka) {
+        return `Rp. ${angka.toLocaleString('id-ID')}`;
+    }
+
+    // Fungsi untuk memperbarui format harga pada elemen tabel
+    function formatHargaInTable() {
+        // Format harga pada elemen dengan class "harga"
+        document.querySelectorAll('.harga').forEach(hargaElement => {
+            const rawPrice = parseInt(hargaElement.textContent.replace(/[^\d]/g, ''), 10) || 0;
+            hargaElement.textContent = formatRupiah(rawPrice);
+        });
+
+        // Format total harga pada elemen dengan class "total-harga"
+        document.querySelectorAll('.total-harga span').forEach(totalHargaElement => {
+            const rawTotalPrice = parseInt(totalHargaElement.textContent.replace(/[^\d]/g, ''), 10) || 0;
+            totalHargaElement.textContent = formatRupiah(rawTotalPrice);
+        });
+    }
+
+    // Panggil fungsi saat halaman selesai dimuat
+    window.onload = function () {
+        formatHargaInTable();
+    };
+</script>
+
         
 
 

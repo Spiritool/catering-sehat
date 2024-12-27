@@ -164,7 +164,7 @@
                                             <b><small>Pesanan <%= i + 1 %></small></b>
                                         </div>
                                         <div class="col-md-3">
-                                            <b><small><%= data[i].tanggal_checkout %></small></b>
+                                            <b><small><%= (new Date(data[i].tanggal_checkout).getDate()).toString().padStart(2, '0') %>/<%= (new Date(data[i].tanggal_checkout).getMonth() + 1).toString().padStart(2, '0') %>/<%= new Date(data[i].tanggal_checkout).getFullYear() %></small></b>
                                         </div>
                                         <div class="col-md-2">
                                             <b><small><%= totalJumlah %> item</small></b>

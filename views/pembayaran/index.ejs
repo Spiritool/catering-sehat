@@ -18,6 +18,7 @@
                                                 <th>Nama User</th>
                                                 <th>Alamat</th>
                                                 <th>Total Harga</th>
+                                                <th>Tanggal Pesanan</th>
                                                 <th>Jumlah Pesanan</th>
                                                 <th>Status Pesanan</th>
                                                 <th colspan="2">Aksi</th>
@@ -30,6 +31,7 @@
                                                 <td><%= data[i].nama_users %></td>
                                                 <td><%= data[i].nama_alamat %></td>
                                                 <td><%= data[i].total_harga %></td>
+                                                <td><%= (new Date(data[i].tanggal_checkout).getDate()).toString().padStart(2, '0') %>/<%= (new Date(data[i].tanggal_checkout).getMonth() + 1).toString().padStart(2, '0') %>/<%= new Date(data[i].tanggal_checkout).getFullYear() %></td>
                                                 <td><%= data[i].total_pesanan %></td>
                                                 <td>
                                                     <form action="/pembayaran/update/<%= data[i].id_checkout %>" method="POST">
