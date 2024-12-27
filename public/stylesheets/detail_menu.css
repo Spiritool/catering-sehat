@@ -90,15 +90,28 @@ p {
 }
 
 /* Customization for Title */
+
 .detail-title {
+    display: flex; /* Menggunakan flexbox untuk pengaturan tata letak */
+    align-items: center; /* Vertikal tengah */
+    justify-content: center; /* Default tengah untuk semua item */
     background-color: var(--primary-color); /* Biru tua */
     border-radius: 8px 8px 0 0;
     color: white;
     text-align: center;
     padding: 10px;
-    margin-left:-12px;
+    margin-left: -12px;
     margin-right: -12px;
-  }
+    position: relative; /* Agar memungkinkan posisi absolut */
+}
+
+.detail-title a {
+    position: absolute; /* Posisi absolut untuk tombol */
+    left: 10px; /* Jarak dari sisi kiri */
+    top: 50%; /* Vertikal tengah */
+    transform: translateY(-50%); /* Koreksi posisi vertikal */
+}
+
 
 /* Button adjustments */
 .btn-group .btn {
@@ -109,15 +122,12 @@ p {
     width: 160px;
 }
 
-/* PRODUK Serupa */
-.produk-title{
-    background-color: var(--primary-color); /* Biru tua */
-    border-radius: 8px 8px 0 0;
-    color: white;
-    padding: 10px;
-    margin-left:0;
-    margin-right: 0;
-}
+
+
+
+
+
+/* PRODUK TERBARU */
 .card-title {
     font-size: 0.9rem;
     font-weight: bold;
@@ -139,10 +149,10 @@ p {
     align-items: flex-start; 
 }
 #topProductsCarousel .carousel-control-prev {
-    left: 20px; /* Mengatur posisi tombol lebih ke kiri */
+    left: -20px; /* Mengatur posisi tombol lebih ke kiri */
 }
 #topProductsCarousel .carousel-control-next {
-    right: 20px; /* Mengatur posisi tombol lebih ke kanan */
+    right: -20px; /* Mengatur posisi tombol lebih ke kanan */
 }
 #topProductsCarousel .carousel-control-prev,
 #topProductsCarousel .carousel-control-next {
@@ -153,8 +163,55 @@ p {
     top: 50%;
     transform: translateY(-50%);
 }
-
-
+/* Style untuk tombol 'Pesan' menggunakan <a> */
+.card-produk .btn-pesan {
+    text-align: center;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4E88AD; /* Warna tombol default */
+    color: white;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+/* Hover untuk tombol 'Pesan' */
+.card-produk .btn-pesan:hover {
+    background-color:var(--primary-color); /* Warna hover lebih gelap */
+}
+/* Overlay hitam transparan saat di-hover */
+.card-produk::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Tidak terlihat secara default */
+    transition: background-color 0.3s ease;
+    z-index: 1;
+    border-radius: 12px;
+}
+/* Saat card-produk di-hover, overlay hitam transparan muncul */
+.card-produk:hover::before {
+    background-color: rgba(72, 72, 72, 0.5); /* Warna hitam dengan transparansi 50% */
+    border-radius: 12px;
+}
+/* Menampilkan tombol 'Pesan' saat card-produk di-hover */
+.card-produk:hover .btn-pesan {
+    display: block;
+    z-index: 2; /* Pastikan tombol berada di atas overlay */
+}
+/* Menambahkan sedikit shadow dan animasi saat di-hover */
+.card-produk:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 /* Position relative untuk memastikan overlay dan tombol diatur dengan benar */
 .card-produk {
     position: relative;

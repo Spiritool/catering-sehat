@@ -7,6 +7,18 @@ const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 const Model_Pembayaran = require("../Model/Model_Pembayaran.js");
+const Model_Users_Kantin = require("../model/Model_Users_Kantin.js");
+
+const connection = require('../config/database');
+
+const queryPromise = (sql, values) => {
+    return new Promise((resolve, reject) => {
+        connection.query(sql, values, (error, results) => {
+            if (error) return reject(error);
+            resolve(results);
+        });
+    });
+};
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -109,7 +121,6 @@ router.post("/update/:id",  upload.single("gambar_menu"), async (req, res, next)
             nama_menu,
             harga_menu,
             deskripsi_menu,
-            stock,
             id_kategori,
         } = req.body;
         
@@ -119,7 +130,6 @@ router.post("/update/:id",  upload.single("gambar_menu"), async (req, res, next)
             nama_menu: nama_menu,
             harga_menu: harga_menu,
             deskripsi_menu: deskripsi_menu,
-            stock: stock,
             id_kategori: id_kategori,
             gambar_menu
         }
@@ -149,10 +159,17 @@ router.get('/delete/:id', async (req, res, next) => {
 
 router.get('/detail/:id', async (req, res, next) => {
     try {
+        let idUSers = req.session.userId;
         const id = req.params.id;
         let rows = await Model_Menu.getId(id);
+        let produkTerbaru = await queryPromise('SELECT * FROM menu ORDER BY id_menu DESC LIMIT 6');
+        let rows2 = await Model_Users_Kantin.getId(idUSers);
+
         res.render('catering/detail_menu', {
             data: rows[0],
+            data2: rows2,
+            produkTerbaru: produkTerbaru // Produk terbaru
+
         });
     } catch (error) {
         console.log(error)
@@ -173,7 +190,7 @@ router.post('/pesan/:id', async function (req, res, next) {
         console.log(req.body);
         await Model_Pembayaran.Store(Data);
         req.flash('success', 'Berhasil menyimpan data');
-        res.redirect('/catering');
+        res.redirect('/catering/keranjang');
     } catch(error) {
         console.log('error: ', error)
         req.flash('error', 'Terjadi kesalahan pada fungsi')
