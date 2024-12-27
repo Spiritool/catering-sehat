@@ -152,10 +152,12 @@ class Model_Pembayaran {
         return new Promise((resolve, reject) => {
             connection.query(`
                 SELECT a.id_checkout, a.*   
-                FROM checkout AS a
-                LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
-                WHERE b.id_users=? AND status_pemesanan='selesai' OR status_pemesanan='batal'
-                GROUP BY a.id_checkout Order by status_pemesanan asc
+FROM checkout AS a
+LEFT JOIN pembayaran AS b ON b.id_checkout = a.id_checkout
+WHERE b.id_users=? AND (status_pemesanan='selesai' OR status_pemesanan='batal')
+GROUP BY a.id_checkout 
+ORDER BY status_pemesanan ASC;
+
             `, [id], (err, rows) => {
                 if (err) {
                     reject(err);
