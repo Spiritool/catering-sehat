@@ -48,12 +48,11 @@
                                 d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
                         </svg>
                     </a>
-                    <!-- Dropdown setelah login -->
-                    <div class="dropdown ms-2">
+                    <% if (data2 && data2.length > 0 && data2[0].id_users) { %>
                         <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center"
-                            type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="/images/users/<%= data2[0].gambar_users %>" alt="User Profile"
-                                class="rounded-circle me-2" width="40" height="40">
+                                 class="rounded-circle me-2" width="40" height="40">
                             <%= data2[0].nama_panggilan_users %>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -64,7 +63,11 @@
                             </li>
                             <li><a class="dropdown-item text-danger" href="../logout">Keluar</a></li>
                         </ul>
-                    </div>
+                    <% } else { %>
+                        <a class="btn btn-outline-secondary me-2" href="/registerkantin" role="button">Daftar</a>
+                        <a class="btn btn-success" href="/loginkantin" role="button">Masuk</a>
+                    <% } %>
+                    
                 </div>
             </div>
         </div>

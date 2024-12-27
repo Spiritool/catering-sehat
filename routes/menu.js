@@ -163,18 +163,18 @@ router.get('/detail/:id', async (req, res, next) => {
         const id = req.params.id;
         let rows = await Model_Menu.getId(id);
         let produkTerbaru = await queryPromise('SELECT * FROM menu ORDER BY id_menu DESC LIMIT 6');
-        let rows2 = await Model_Users_Kantin.getId(idUSers);
+        let rows2 = idUSers ? await Model_Users_Kantin.getId(idUSers) : null;
 
         res.render('catering/detail_menu', {
             data: rows[0],
-            data2: rows2,
+            data2: rows2, // Data pengguna, bisa null jika tidak login
             produkTerbaru: produkTerbaru // Produk terbaru
-
         });
     } catch (error) {
         console.log(error)
     }
 });
+
 
 router.post('/pesan/:id', async function (req, res, next) {
     try {
