@@ -142,7 +142,7 @@ router.get('/riwayat', async (req, res, next) => {
         let rows = await Model_Pembayaran.getRiwayatAdmin(id);
         let rows2 = await Model_Pembayaran.getMenu(id);
         let rows3 = await Model_Users.getId(id)
-        res.render('pembayaran/index', {
+        res.render('riwayat/index', {
             id: id,
             data: rows, 
             data2: rows3,
