@@ -118,45 +118,40 @@
                                     </div>
                                 </th>
 
-                                <td class="align-middle">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <img src="../images/menu/<%= data[i].gambar_menu %>" class="img-cart rounded"
-                                            alt="Healthy Fried Rice" style="width: 5rem; height: 5rem;">
-                                        <div class="d-flex flex-column ms-3">
-                                            <small class="nama text-primary">
-                                                <%= data[i].nama_menu %>
-                                            </small>
-                                            <small class="opsi text-success">
-                                                <%= data[i].kategori_pesanan %>
-                                            </small>
-                                            <small class="harga text-danger">
-                                                <%= data[i].harga_menu %>
-                                            </small>
-                                        </div>
+                            <td class="align-middle">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="../images/menu/<%= data[i].gambar_menu %>" class="img-cart rounded"
+                                        alt="Healthy Fried Rice" style="width: 5rem; height: 5rem;">
+                                    <div class="d-flex flex-column ms-3">
+                                        <small class="nama text-primary"><%= data[i].nama_menu %></small>
+                                        <small class="opsi text-success"><%= data[i].kategori_pesanan %></small>
+                                        <small class="harga text-danger" data-price="<%= data[i].harga_menu %>">
+                                            Rp. <%= data[i].harga_menu %>
+                                        </small>
                                     </div>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div class="input-group input-group-sm d-flex justify-content-center"
-                                            style="width: 130px;">
-                                            <h1 id="id" name="id" class="id text-danger" hidden>
-                                                <%= data[i].id_pembayaran %>
-                                            </h1>
-                                            <button class="btn btn-outline-secondary btn-sm btn-minus" type="button"
-                                                style="width: 30px;">-</button>
-                                            <input type="number" class="form-control text-center quantity-input"
-                                                name="jumlah" data-id="<%= data[i].id %>" value="<%= data[i].jumlah %>"
-                                                style="width: 50px;" min="1">
-                                            <button class="btn btn-outline-secondary btn-sm btn-plus" type="button"
-                                                style="width: 30px;">+</button>
-                                        </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="input-group input-group-sm d-flex justify-content-center"
+                                        style="width: 130px;">
+                                        <h1 id="id" name="id" class="id text-danger" hidden><%= data[i].id_pembayaran %>
+                                        </h1>
+                                        <button class="btn btn-outline-secondary btn-sm btn-minus" type="button"
+                                            style="width: 30px;">-</button>
+                                        <input type="number" class="form-control text-center quantity-input"
+                                            name="jumlah" data-id="<%= data[i].id %>" value="<%= data[i].jumlah %>"
+                                            style="width: 50px;" min="1">
+                                        <button class="btn btn-outline-secondary btn-sm btn-plus" type="button"
+                                            style="width: 30px;">+</button>
                                     </div>
-                                </td>
-                                <td class="align-middle text-danger total-harga">Rp. </td>
-                                <td class="align-middle">
-                                    <a href="/pembayaran/delete/<%= data[i].id_pembayaran %>"
-                                        class="text-primary px-3 link-offset-2 link-underline link-underline-opacity-0"><small>Hapus</small></a>
-                                </td>
+                                </div>
+                            </td>
+                            <td class="align-middle text-danger total-harga">Rp. </td>
+                            <td class="align-middle">
+                                <a href="/pembayaran/delete/<%= data[i].id_pembayaran %>"
+                                    class="text-primary px-3 link-offset-2 link-underline link-underline-opacity-0"><small>Hapus</small></a>
+                            </td>
 
                         </tr>
                         <% } %>
@@ -301,9 +296,16 @@
             const totalElement = document.getElementById('total');
             const discountRate = 0;
 
+            // Fungsi untuk format angka ke Rupiah
+            function formatRupiah(angka) {
+                return `Rp. ${angka.toLocaleString('id-ID')}`;
+            }
+
+            // Fungsi untuk memperbarui harga total per menu dan subtotal
             function updateTotal() {
                 let subtotal = 0;
 
+                // Memperbarui subtotal berdasarkan checkbox yang dicentang
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const priceElement = checkbox.closest('tr').querySelector('.total-harga');
@@ -313,17 +315,38 @@
                     }
                 });
 
+                // Menghitung diskon dan total keseluruhan
                 const discount = subtotal * discountRate;
                 const total = subtotal - discount;
 
-                subtotalElement.textContent = `Rp. ${subtotal.toLocaleString('id-ID')}`;
-                totalElement.textContent = `Rp. ${total.toLocaleString('id-ID')}`;
+                // Memperbarui subtotal dan total
+                subtotalElement.textContent = formatRupiah(subtotal);
+                totalElement.textContent = formatRupiah(total);
             }
 
+            // Format harga-menu saat halaman dimuat
+            document.querySelectorAll('.harga-menu').forEach(hargaMenuElement => {
+                const rawPrice = parseInt(hargaMenuElement.getAttribute('data-price'), 10) || 0;
+                hargaMenuElement.textContent = formatRupiah(rawPrice);
+            });
+
+            // Menambahkan event listener untuk checkbox
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateTotal);
             });
+
+            // Menambahkan event listener untuk input jumlah
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('input', updateTotal);
+                input.addEventListener('change', updateTotal);
+            });
+
+            // Perbarui total saat halaman dimuat
+            window.onload = function () {
+                updateTotal();
+            };
         </script>
+
 
         <script>
             // Fungsi untuk memperbarui total harga per item

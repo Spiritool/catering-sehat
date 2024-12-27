@@ -236,57 +236,57 @@ router.post('/update-quantity', async (req, res) => {
     }
 });
 
-router.post('/checkout/pesanan', async (req, res) => {
-    const { items, total_harga, id_alamat } = req.body;
+    router.post('/checkout/pesanan', async (req, res) => {
+        const { items, total_harga, id_alamat } = req.body;
 
-    try {
-        // 1. Menginsert ke tabel checkout menggunakan Promise
-        const checkoutResults = await new Promise((resolve, reject) => {
-            connection.query(
-                `INSERT INTO checkout (total_harga, tanggal_checkout) VALUES (?, NOW())`,
-                [total_harga],
-                (error, results) => {
-                    if (error) return reject(error);
-                    resolve(results);
-                }
-            );
-        });
-
-        if (checkoutResults && checkoutResults.insertId) {
-            const id_checkout = checkoutResults.insertId;
-            console.log('ID checkout yang dibuat:', id_checkout);
-
-            // 2. Mengupdate tabel pembayaran berdasarkan id_pembayaran dari items
-            const updatePromises = items.map(item => {
-                return new Promise((resolve, reject) => {
-                    connection.query(
-                        `UPDATE pembayaran SET id_checkout = ?, id_alamat = ? WHERE id_pembayaran = ?`,
-                        [id_checkout, id_alamat, item.id_pembayaran],
-                        (error, results) => {
-                            if (error) return reject(error);
-                            resolve(results);
-                        }
-                    );
-                });
+        try {
+            // 1. Menginsert ke tabel checkout menggunakan Promise
+            const checkoutResults = await new Promise((resolve, reject) => {
+                connection.query(
+                    `INSERT INTO checkout (total_harga, tanggal_checkout) VALUES (?, NOW())`,
+                    [total_harga],
+                    (error, results) => {
+                        if (error) return reject(error);
+                        resolve(results);
+                    }
+                );
             });
 
-            // Tunggu semua update selesai
-            await Promise.all(updatePromises);
+            if (checkoutResults && checkoutResults.insertId) {
+                const id_checkout = checkoutResults.insertId;
+                console.log('ID checkout yang dibuat:', id_checkout);
 
-            console.log('Pembayaran diperbarui untuk semua item');
+                // 2. Mengupdate tabel pembayaran berdasarkan id_pembayaran dari items
+                const updatePromises = items.map(item => {
+                    return new Promise((resolve, reject) => {
+                        connection.query(
+                            `UPDATE pembayaran SET id_checkout = ?, id_alamat = ? WHERE id_pembayaran = ?`,
+                            [id_checkout, id_alamat, item.id_pembayaran],
+                            (error, results) => {
+                                if (error) return reject(error);
+                                resolve(results);
+                            }
+                        );
+                    });
+                });
 
-            // Redirect ke halaman konfirmasi atau keranjang setelah proses selesai
-            return res.redirect(`/catering/checkout/konfirmasi?id=${id_checkout}`);
-        } else {
-            throw new Error('ID Checkout tidak ditemukan setelah insert');
+                // Tunggu semua update selesai
+                await Promise.all(updatePromises);
+
+                console.log('Pembayaran diperbarui untuk semua item');
+
+                // Redirect ke halaman konfirmasi atau keranjang setelah proses selesai
+                return res.redirect(`/catering/checkout/konfirmasi?id=${id_checkout}`);
+            } else {
+                throw new Error('ID Checkout tidak ditemukan setelah insert');
+            }
+        } catch (error) {
+            console.error('Kesalahan saat checkout:', error.message);
+
+            // Redirect ke halaman error dengan pesan kesalahan
+            return res.redirect(`/catering/error?message=${encodeURIComponent(error.message)}`);
         }
-    } catch (error) {
-        console.error('Kesalahan saat checkout:', error.message);
-
-        // Redirect ke halaman error dengan pesan kesalahan
-        return res.redirect(`/catering/error?message=${encodeURIComponent(error.message)}`);
-    }
-});
+    });
 
 
 
