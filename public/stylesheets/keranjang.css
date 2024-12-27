@@ -72,6 +72,9 @@ p {
 .container-fluid-latar{
     background-color: #EBF1F3;
 }
+.form-check-label{
+    color: var(--primary-color);
+}
 
 .promo-section {
     padding: 20px;

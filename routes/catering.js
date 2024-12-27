@@ -42,8 +42,10 @@ router.get('/keranjang', async (req, res, next) => {
         id = req.session.userId
         console.log("routes", id)
         let rows = await Model_Pembayaran.getKeranjang(id);
+        let rows2 = await Model_Users_Kantin.getId(id);
         res.render('catering/keranjang', {
             data: rows,
+            data2: rows2,           // Data user
             id: id,
         });
     } catch (error) {
@@ -55,6 +57,7 @@ router.post('/checkout', async (req, res) => {
     try {
         let id = req.session.userId;
         let rows = await Model_Alamat.getId(id);
+        let rows2 = await Model_Users_Kantin.getId(id);
 
         const {
             itemIds
@@ -92,6 +95,7 @@ router.post('/checkout', async (req, res) => {
             res.render('catering/checkout', {
                 items: results,
                 data: rows,
+            data2: rows2,           // Data user
                 subtotal,
                 discount,
                 total
@@ -108,10 +112,12 @@ router.get('/checkout', async (req, res) => {
     try {
         let id = req.session.userId;
         let rows = await Model_Alamat.getId(id);
+        let rows2 = await Model_Users_Kantin.getId(id);
 
         res.render('catering/checkout', {
             items: [],
             data: rows,
+            data2: rows2,           // Data user
             subtotal: 0,
             discount: 0,
             total: 0,

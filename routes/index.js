@@ -8,6 +8,16 @@ const bcrypt = require('bcrypt');
 
 var Model_Users = require('../Model/Model_Users.js');
 var Model_Users_Kantin = require('../model/Model_Users_Kantin.js');
+var Model_Menu = require('../model/Model_Menu.js');
+
+const queryPromise = (sql, values) => {
+  return new Promise((resolve, reject) => {
+      connection.query(sql, values, (error, results) => {
+          if (error) return reject(error);
+          resolve(results);
+      });
+  });
+};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -24,11 +34,12 @@ const upload = multer({ storage: storage })
 /* GET home page. */
 router.get('/', async function (req, res, next) {
   try {
-      let rows = await Model_Dokter.getAll();
-      let layanan = await Model_Layanan.getAll(); // Ambil data layanan dari database
-      res.render('index', {
+      let rows = await Model_Menu.getAll();
+      let produkTerbaru = await queryPromise('SELECT * FROM menu ORDER BY id_menu DESC LIMIT 6');
+      res.render('catering/index', {
           data: rows,
-          layanan: layanan // Kirim data layanan ke view
+          produkTerbaru: produkTerbaru // Produk terbaru
+
       });
   } catch (error) {
       console.error("Error:", error);
@@ -221,7 +232,7 @@ router.get('/logout', function(req, res) {
     if(err) {
       console.error(err);
     } else {
-      res.redirect('/login');
+      res.redirect('/loginkantin');
     }
   });
 });
